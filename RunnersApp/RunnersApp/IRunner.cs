@@ -9,7 +9,6 @@ namespace RunnersApp
         string Sex { get; }
         void AddData(string distance, string time);
         void AddData(float distance, TimeSpan time);
-
         event TimeAndDistanceAddedDelegate TimeAndDistanceAdded;
         Statistics GetStatistics();
     }

@@ -17,10 +17,8 @@ namespace RunnersApp
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-
             if (File.Exists(fileName))
             {
-
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
@@ -59,7 +57,6 @@ namespace RunnersApp
             }
         }
 
-
         public override void AddData(float distance, TimeSpan time)
         {
             TimeSpan TS = new TimeSpan(0, 5, 0, 0);
@@ -80,6 +77,5 @@ namespace RunnersApp
                 throw new Exception("invalid value");
             }
         }
-
     }
 }

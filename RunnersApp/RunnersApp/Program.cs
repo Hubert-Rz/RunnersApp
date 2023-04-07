@@ -7,16 +7,17 @@ namespace RunnerApp
 {
     internal class Program
     {
+
         private static void Main(string[] args)
         {
             WritelineColor(ConsoleColor.Magenta, "Hello to the [RunnersApp] console app.");
-
             bool CloseApp = false;
-
             while (!CloseApp)
             {
                 RunnersInDirectory runners = new RunnersInDirectory();
                 runners.RunnerAdded += RunnerRunnerAdded;
+                int count = 0;
+
                 void RunnerRunnerAdded(object sender, EventArgs args)
                 {
                     Console.WriteLine("New runner added!");
@@ -30,13 +31,13 @@ namespace RunnerApp
                 try
                 {
                     runners.ShowRunners();
+                    count = runners.filesList.Count;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine($"Exception catched: {e.Message}");
                 }
 
-                int count = runners.filesList.Count;
                 WritelineColor(ConsoleColor.Yellow, "What you want to do? \nPress key A, number runner or X: ");
                 var userInput = Console.ReadLine().ToUpper();
                 var numerical = int.TryParse(userInput, out int result);
@@ -62,11 +63,9 @@ namespace RunnerApp
                                 Console.WriteLine($"Exception catched: {e.Message}");
                             }
                             break;
-
                         case ("X"):
                             CloseApp = true;
                             break;
-
                         default:
                             WritelineColor(ConsoleColor.Red, "Invalid operation.\n");
                             continue;
@@ -74,13 +73,10 @@ namespace RunnerApp
                 }
                 else
                 {
-
                     int index = 1;
-
-                    if (result > 0 && result < count)
+                    count = runners.filesList.Count;
+                    if (result > 0 && result <= count)
                     {
-
-
                         foreach (string file in runners.filesList)
                         {
 
@@ -104,7 +100,6 @@ namespace RunnerApp
             }
             WritelineColor(ConsoleColor.DarkYellow, "\n\nBye Bye! Press any key to leave.");
             Console.ReadKey();
-
         }
 
         private static void AddData(string name, string surname, string sex)
@@ -122,7 +117,6 @@ namespace RunnerApp
 
             while (true)
             {
-
                 Console.Write("Enter the distance traveled in km (00,00):");
                 inputDistance = Console.ReadLine();
                 if (inputDistance == "q")
@@ -131,10 +125,6 @@ namespace RunnerApp
                 }
                 Console.Write("Enter the time for running the above distance (hh:mm:ss):");
                 inputTime = Console.ReadLine();
-                if (inputTime == "q")
-                {
-                    break;
-                }
 
                 if (inputDistance == "q" || inputTime == "q")
                 {
@@ -155,15 +145,16 @@ namespace RunnerApp
                 }
             }
         }
+
         private static void statistics(string name, string surname, string sex)
         {
             try
             {
-
                 var runner = new RunnerInFile(name, surname, sex);
                 var statistic = runner.GetStatistics();
                 var tempo = statistic.AveragePace;
-                WritelineColor(ConsoleColor.Red, $"Count: {statistic.Count}");
+                WritelineColor(ConsoleColor.Red, $"Runner stats: {name} {surname}:");
+                WritelineColor(ConsoleColor.Red, $"Number of gears: {statistic.Count}");
                 WritelineColor(ConsoleColor.Red, $"Sum Distance: {statistic.SumDistance}");
                 WritelineColor(ConsoleColor.Red, $"Sum Time: {statistic.SumTime}");
                 WritelineColor(ConsoleColor.Red, $"Average pace: {tempo.Minutes}:{tempo.Seconds}");

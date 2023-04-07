@@ -5,10 +5,10 @@ namespace RunnersApp
 {
     public class RunnersInDirectory
     {
-
         public delegate void RunnerAddedDelegate(object sender, EventArgs args);
         public event RunnerAddedDelegate RunnerAdded;
         private string fileName;
+
         public RunnersInDirectory()
         {
 
@@ -16,14 +16,13 @@ namespace RunnersApp
 
         public void AddRunner(string name, string surname, string sex)
         {
-            if (name.Length!=0 && surname.Length!=0 && sex.Length!=0) 
+            if (name.Length != 0 && surname.Length != 0 && sex.Length != 0)
             {
                 RunnerInFile runner = new RunnerInFile(name, surname, sex);
                 fileName = sex + "_" + name + "_" + surname + ".txt";
                 if (!File.Exists(fileName))
                 {
                     File.Create(fileName).Close();
-
                     if (RunnerAdded != null)
                     {
                         RunnerAdded(this, new EventArgs());
@@ -35,6 +34,7 @@ namespace RunnersApp
                 throw new Exception("invalid value");
             }
         }
+
         public void ShowRunners()
         {
             var dir = Directory.GetCurrentDirectory();
@@ -42,11 +42,10 @@ namespace RunnersApp
             int index = 1;
             string fullName = "";
             WritelineColor(ConsoleColor.Blue, "Actual list Runners in base: ");
-            if (dir != null && Directory.GetFiles(dir,"*.txt").Count() > 0)
+            if (dir != null && Directory.GetFiles(dir, "*.txt").Count() > 0)
             {
                 foreach (string file in Directory.GetFiles(dir))
                 {
-
                     var ext = Path.GetExtension(file);
                     if (ext == ".txt")
                     {
@@ -62,6 +61,7 @@ namespace RunnersApp
                 throw new Exception("there are no files in the directory");
             }
         }
+
         public List<string> filesList
         {
             get
@@ -88,6 +88,7 @@ namespace RunnersApp
                 }
             }
         }
+
         private static void WritelineColor(ConsoleColor color, string text)
         {
             Console.ForegroundColor = color;
@@ -95,7 +96,4 @@ namespace RunnersApp
             Console.ResetColor();
         }
     }
-
-
-
 }

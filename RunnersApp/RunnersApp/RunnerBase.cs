@@ -22,6 +22,5 @@ namespace RunnersApp
         public abstract Statistics GetStatistics();
         public abstract void AddData(string distance, string time);
         public abstract void AddData(float distance, TimeSpan time);
-   
     }
 }
