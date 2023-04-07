@@ -1,6 +1,4 @@
-﻿using RunnersApp;
-using static RunnersApp.RunnerBase;
-
+﻿
 namespace RunnersApp
 {
     public class RunnersInDirectory

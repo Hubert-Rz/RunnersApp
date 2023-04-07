@@ -4,7 +4,6 @@ namespace RunnersApp
     public class RunnerInFile : RunnerBase
     {
         public override event TimeAndDistanceAddedDelegate TimeAndDistanceAdded;
-        //public override event RunnerAddedDelegate RunnerAdded;
         private string fileName;
 
         public RunnerInFile(string name, string surname, string sex)

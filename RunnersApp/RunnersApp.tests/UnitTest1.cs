@@ -1,4 +1,3 @@
-using System.Xml.Linq;
 
 namespace RunnersApp.tests
 {
