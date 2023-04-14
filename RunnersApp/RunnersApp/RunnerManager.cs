@@ -1,13 +1,13 @@
 ﻿
 namespace RunnersApp
 {
-    public class RunnersInDirectory
+    public class RunnerManager
     {
         public delegate void RunnerAddedDelegate(object sender, EventArgs args);
         public event RunnerAddedDelegate RunnerAdded;
         private string fileName;
 
-        public RunnersInDirectory()
+        public RunnerManager()
         {
 
         }

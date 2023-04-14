@@ -11,11 +11,11 @@ namespace RunnerApp
             bool CloseApp = false;
             while (!CloseApp)
             {
-                RunnersInDirectory runners = new RunnersInDirectory();
-                runners.RunnerAdded += RunnerRunnerAdded;
+                RunnerManager runners = new RunnerManager();
+                runners.RunnerAdded += NewRunnerAdded;
                 int count = 0;
 
-                void RunnerRunnerAdded(object sender, EventArgs args)
+                void NewRunnerAdded(object sender, EventArgs args)
                 {
                     Console.WriteLine("New runner added!");
                 }
@@ -47,8 +47,14 @@ namespace RunnerApp
                             string name = Console.ReadLine();
                             Console.Write("Surname runner's:");
                             string surname = Console.ReadLine();
-                            Console.Write("Sex runner's:");
-                            string sex = Console.ReadLine();
+                            Console.Write("Sex runner's (F or M):");
+                            string sex = Console.ReadLine().ToUpper();
+                            while (sex != null && sex != "F" && sex != "M")
+                            {
+                                Console.Write("Sex runner's (F or M):");
+                                sex = Console.ReadLine().ToUpper();
+                            }
+                            
                             try
                             {
                                 runners.AddRunner(name, surname, sex);
@@ -84,7 +90,7 @@ namespace RunnerApp
                                 string surname = file.Split("_")[2];
                                 WritelineColor(ConsoleColor.Blue, $"Runner:{name} {surname}.\n Enter run data and/or press 'q' to view stats");
                                 AddData(name, surname, sex);
-                                statistics(name, surname, sex);
+                                Statistics(name, surname, sex);
                             }
                             index++;
                         }
@@ -143,7 +149,7 @@ namespace RunnerApp
             }
         }
 
-        private static void statistics(string name, string surname, string sex)
+        private static void Statistics(string name, string surname, string sex)
         {
             try
             {
